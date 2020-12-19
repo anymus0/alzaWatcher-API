@@ -23,9 +23,10 @@ const browser = new Browser();
 
 (async () => {
   try {
-    browser.snapImg(browser.productsURL)
     console.log(`Server is listening on port ${port}`)
     app.listen(port)
+    const prods = await browser.scrapeJob()
+    console.log(prods)
   } catch (error) {
     console.log('error inside the server')
     console.error(error)

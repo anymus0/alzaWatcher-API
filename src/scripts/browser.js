@@ -1,5 +1,6 @@
 'use strict'
 const puppeteer = require('puppeteer')
+const path = require('path')
 
 class Browser {
   constructor (
@@ -42,30 +43,34 @@ class Browser {
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
     // set req headers to avoid bot detection
-    await page.setJavaScriptEnabled(true)
-    await page.setViewport(this.viewPort)
-    await page.setExtraHTTPHeaders(this.reqHeaders)
+    page.setJavaScriptEnabled(true)
+    page.setViewport(this.viewPort)
+    page.setExtraHTTPHeaders(this.reqHeaders)
     await page.goto(this.productsURL)
     // wait for filters to load
     await page.waitForTimeout(4000)
     // exec script in browser context
     const productStatuses = await page.evaluate(this.scrapeProducts)
-    console.log(productStatuses)
     await browser.close()
+    return productStatuses
   }
 
   // take a screenshot of a URL
   async snapImg (url) {
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
-    await page.setJavaScriptEnabled(true)
-    await page.setViewport(this.viewPort)
-    await page.setExtraHTTPHeaders(this.reqHeaders)
+    page.setJavaScriptEnabled(true)
+    page.setViewport(this.viewPort)
+    page.setExtraHTTPHeaders(this.reqHeaders)
     await page.goto(url)
     // wait for filters to load
     await page.waitForTimeout(4000)
     // take screenshot
-    await page.screenshot({ path: 'img.jpeg', type: 'jpeg' })
+    await page.screenshot({
+      path: path.join(process.cwd(), '..', 'img', 'img.jpeg'),
+      type: 'jpeg'
+    })
+    await browser.close()
   }
 
   // end of class
