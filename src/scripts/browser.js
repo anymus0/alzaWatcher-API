@@ -64,7 +64,7 @@ class Browser {
     page.setExtraHTTPHeaders(this.reqHeaders)
     await page.goto(url)
     // wait for filters to load
-    await page.waitForTimeout(2000)
+    await page.waitForTimeout(3000)
     // take screenshot
     const imgName = `${Date.now()}-img.jpeg`
     await page.screenshot({

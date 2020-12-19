@@ -22,7 +22,8 @@ exports.getProdStatus = async (req, res) => {
     res.status(200).json({
       success: true,
       products: prods,
-      date: new Date(Date.now())
+      date: new Date(Date.now()),
+      productsURL: browser.productsURL
     })
   } catch (error) {
     res.status(500).json({
