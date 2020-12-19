@@ -1,6 +1,7 @@
 'use strict'
 const puppeteer = require('puppeteer')
 const path = require('path')
+const fs = require('fs/promises')
 
 class Browser {
   constructor (
@@ -19,6 +20,7 @@ class Browser {
     }
     this.viewPort = viewPort
     this.productsURL = productsURL
+    this.imgDir = path.join(process.cwd(), '..', 'img')
   }
 
   // methods
@@ -68,11 +70,19 @@ class Browser {
     // take screenshot
     const imgName = `${Date.now()}-img.jpeg`
     await page.screenshot({
-      path: path.join(process.cwd(), '..', 'img', imgName),
+      path: path.join(this.imgDir, imgName),
       type: 'jpeg'
     })
     await browser.close()
     return imgName
+  }
+
+  async removeImages () {
+    // remove every file in 'imgDir'
+    const imgFiles = await fs.readdir(this.imgDir)
+    imgFiles.forEach(async (imgFile) => {
+      await fs.unlink(path.join(this.imgDir, imgFile))
+    })
   }
 
   // end of class

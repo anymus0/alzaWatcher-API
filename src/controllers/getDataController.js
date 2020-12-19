@@ -3,6 +3,8 @@ const browser = new Browser()
 
 exports.getImage = async (req, res) => {
   try {
+    // delete previous images
+    await browser.removeImages()
     const img = await browser.snapImg(browser.productsURL)
     res.status(200).json({
       success: true,
