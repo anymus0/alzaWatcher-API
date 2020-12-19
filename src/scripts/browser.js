@@ -19,6 +19,10 @@ class Browser {
     }
     this.viewPort = viewPort
     this.productsURL = productsURL
+    this.screenShotOpts = {
+      path: path.join(process.cwd(), '..', 'img', 'img.jpeg'),
+      type: 'jpeg'
+    }
   }
 
   // methods
@@ -64,13 +68,11 @@ class Browser {
     page.setExtraHTTPHeaders(this.reqHeaders)
     await page.goto(url)
     // wait for filters to load
-    await page.waitForTimeout(4000)
+    await page.waitForTimeout(2000)
     // take screenshot
-    await page.screenshot({
-      path: path.join(process.cwd(), '..', 'img', 'img.jpeg'),
-      type: 'jpeg'
-    })
+    await page.screenshot(this.screenShotOpts)
     await browser.close()
+    return this.screenShotOpts.path
   }
 
   // end of class

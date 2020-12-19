@@ -16,17 +16,18 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // import and use routes
-//
+const getData = require('./routes/getDataRoute')
+app.use('/getData', getData);
 
 // create a new Browser instance
-const browser = new Browser();
+// const browser = new Browser();
 
 (async () => {
   try {
     console.log(`Server is listening on port ${port}`)
     app.listen(port)
-    const prods = await browser.scrapeJob()
-    console.log(prods)
+    // const prods = await browser.scrapeJob()
+    // console.log(prods)
   } catch (error) {
     console.log('error inside the server')
     console.error(error)

@@ -1,0 +1,2 @@
+### Routes:
+- GET: /getData/latestImage
