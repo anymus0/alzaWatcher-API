@@ -12,3 +12,19 @@ exports.getImage = async (req, res) => {
     })
   }
 }
+
+exports.getProdStatus = async (req, res) => {
+  try {
+    const prods = await browser.scrapeJob()
+    res.status(200).json({
+      success: true,
+      products: prods,
+      date: new Date(Date.now())
+    })
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error
+    })
+  }
+}

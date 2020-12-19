@@ -5,7 +5,7 @@ const path = require('path')
 class Browser {
   constructor (
     viewPort = { width: 2560, height: 1440 },
-    productsURL = 'https://www.alza.hu/olcso-nvidia-geforce-rtx-30-videokartyak/18881565.htm#f&limit=-1--200000&cst=1&cud=0&pg=1&pn=1&prod=&par340=340-239785899,340-239797673&sc=321.8999938964844'
+    productsURL = 'https://www.alza.hu/olcso-nvidia-geforce-rtx-30-videokartyak/18881565.htm#f&limit=-1--200000&cst=1&cud=0&pg=1&pn=1&prod=&par340=340-239785899,340-239797673&sc=643.7999877929688'
   ) {
     // initial values
     this.reqHeaders = {
