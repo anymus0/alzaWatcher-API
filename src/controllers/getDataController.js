@@ -4,7 +4,10 @@ const browser = new Browser()
 exports.getImage = async (req, res) => {
   try {
     const img = await browser.snapImg(browser.productsURL)
-    res.sendFile(img)
+    res.status(200).json({
+      success: true,
+      image: img
+    })
   } catch (error) {
     res.status().json({
       success: false,

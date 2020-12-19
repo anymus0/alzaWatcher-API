@@ -19,10 +19,6 @@ class Browser {
     }
     this.viewPort = viewPort
     this.productsURL = productsURL
-    this.screenShotOpts = {
-      path: path.join(process.cwd(), '..', 'img', 'img.jpeg'),
-      type: 'jpeg'
-    }
   }
 
   // methods
@@ -70,9 +66,13 @@ class Browser {
     // wait for filters to load
     await page.waitForTimeout(2000)
     // take screenshot
-    await page.screenshot(this.screenShotOpts)
+    const imgName = `${Date.now()}-img.jpeg`
+    await page.screenshot({
+      path: path.join(process.cwd(), '..', 'img', imgName),
+      type: 'jpeg'
+    })
     await browser.close()
-    return this.screenShotOpts.path
+    return imgName
   }
 
   // end of class
