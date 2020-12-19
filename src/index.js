@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const compression = require('compression')
 const xss = require('xss-clean')
-const intervalCheck = require('./scripts/intervalChecker')
+const browser = require('./scripts/browser')
 const port = process.env.PORT || 3000
 app.use(xss())
 app.use(compression())
@@ -19,10 +19,11 @@ if (process.env.NODE_ENV !== 'production') {
 
 (async () => {
   try {
-    intervalCheck.refresh()
+    browser.refresh()
     console.log(`Server is listening on port ${port}`)
     app.listen(port)
   } catch (error) {
+    console.log('error inside the server')
     console.error(error)
     process.exit(1)
   }
