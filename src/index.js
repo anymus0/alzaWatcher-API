@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const compression = require('compression')
 const xss = require('xss-clean')
-const browser = require('./scripts/browser')
+const Browser = require('./scripts/browser')
 const port = process.env.PORT || 3000
 app.use(xss())
 app.use(compression())
@@ -17,9 +17,12 @@ if (process.env.NODE_ENV !== 'production') {
 // import and use routes
 //
 
+// create a new Browser instance
+const browser = new Browser();
+
 (async () => {
   try {
-    browser.refresh()
+    browser.snapImg(browser.productsURL)
     console.log(`Server is listening on port ${port}`)
     app.listen(port)
   } catch (error) {
