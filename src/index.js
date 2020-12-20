@@ -49,12 +49,10 @@ const io = socket(socketPort, {
 })
 
 // IO logic
-io.on('connection', (socket) => {
-  setInterval(async () => {
-    const res = await fetch(`http://localhost:${restPort}/getData/latestStatus`)
-    const prods = await res.json()
-    io.emit('productRefresh', prods)
-  }, Math.floor(Math.random() * (30000 - 20000 + 1) + 20000))
-})
+setInterval(async () => {
+  const res = await fetch(`http://localhost:${restPort}/getData/latestStatus`)
+  const prods = await res.json()
+  io.emit('productRefresh', prods)
+}, Math.floor(Math.random() * (30000 - 20000 + 1) + 20000))
 
 init()
