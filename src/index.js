@@ -44,7 +44,7 @@ const init = async () => {
 // create server
 const io = socket(socketPort, {
   cors: {
-    origin: 'http://172.28.3.18:4200'
+    origin: (process.env.NODE_ENV !== 'production' ? '*' : false)
   }
 })
 
