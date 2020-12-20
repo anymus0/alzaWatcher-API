@@ -59,7 +59,6 @@ class Browser {
 
   // take a screenshot of a URL
   async snapImg (url) {
-    console.log(this.imgDir)
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
     page.setJavaScriptEnabled(true)
