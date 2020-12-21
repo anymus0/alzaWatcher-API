@@ -6,7 +6,7 @@ const compression = require('compression')
 const xss = require('xss-clean')
 const path = require('path')
 const fetch = require('node-fetch')
-const socket = require('socket.io')
+const { Server } = require('socket.io')
 const restPort = process.env.REST_PORT || 3000
 const socketPort = process.env.SOCKET_PORT || 3001
 
@@ -42,7 +42,7 @@ const init = async () => {
 }
 
 // create server
-const io = socket(socketPort, {
+const io = new Server(socketPort, {
   cors: {
     origin: (process.env.NODE_ENV !== 'production' ? '*' : false)
   }
